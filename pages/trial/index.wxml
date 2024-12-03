@@ -1,0 +1,106 @@
+<!--index.wxml-->
+<navigation-bar title="报价指南(测试版)" back="{{false}}" color="black" background="#FFF"></navigation-bar>
+<scroll-view class="scrollarea" scroll-y type="list">
+  <view class="h1_title">
+    <span class="h1_title_font">
+      新房装修费用试算
+    </span>
+  </view>
+  <view class="container">
+    <view class="page-body">
+      <form catchsubmit="formSubmit" catchreset="formReset" style="{{from_style1}}">
+        <view class="weui-cell__bd" style="margin: 30px 0">
+          <sapn>建筑面积</sapn>
+          <input id="input_acreage"  class="weui-input" name="input" bindblur="acreage"    style="{{inputStyle}}" placeholder-class="weui_input_placeholder_class" placeholder="公摊前面积/㎡" value="{{acreage}}" />
+          <sapn class="error_input_style">{{acreageError}}</sapn>
+        </view>
+        <view class="weui-cell__bd" style="margin: 30px 0">
+          <sapn>封阳台
+          </sapn>
+          <view style="display:flex; align-items: center;">
+            <input class="weui-input-yt" name="input"  bindblur="fyt" placeholder-class="weui_input_placeholder_class" placeholder="面积" value="{{acreage_yt}}" />
+            <input class="weui-input-yt" style="margin-left: 30px;" name="input" placeholder-class="weui_input_placeholder_class" placeholder="费用价格"  value="{{acreage_yt_cost}}"/>
+          </view>
+          <sapn class="call-word">断桥铝钢网一体[90mm]≈500/㎡,[110mm]≈650/㎡</sapn>
+        </view>
+
+        <view class="weui-cell__bd" style="margin: 30px 0">
+          <sapn>拆除和砌墙/元
+          </sapn>
+          <input class="weui-input" name="input" placeholder-class="weui_input_placeholder_class" value="{{dismantle_cost}}"  bindblur="a" placeholder="费用价格" />
+          <sapn class="call-word">厨卫少量拆砸，其他位置布局微调，保温层清理</sapn>
+        </view>
+        <view class="weui-cell__bd" style="margin: 30px 0">
+          <sapn>铺设地暖/元
+          </sapn>
+          <input class="weui-input"  value="{{dn}}"  name="input" placeholder-class="weui_input_placeholder_class" placeholder="费用价格" />
+          <sapn class="call-word">金牛、保利品牌材料可折算约75元/㎡</sapn>
+        </view>
+      </form>
+
+      <form catchsubmit="formSubmit" catchreset="formReset" style="{{from_style2}}">
+        <view class="weui-cell__bd" style="margin: 30px 0">
+          <sapn>水电改造/元</sapn>
+          <input id="input_acreage"  class="weui-input" name="input"  placeholder-class="weui_input_placeholder_class" placeholder="费用价格" value="{{plumber}}" />
+          <sapn class="call-word">冷热水，电路改造约55元/㎡建筑面积</sapn>
+        </view>
+        <view class="weui-cell__bd" style="margin: 30px 0">
+          <sapn>卫生间防水/元
+          </sapn>
+          <input class="weui-input" name="input" placeholder-class="weui_input_placeholder_class" value="{{waterproof}}"   placeholder="费用价格" />
+          <sapn class="call-word">雨虹、立邦品牌防水材料约800元/个卫生间</sapn>
+        </view>
+        <view class="weui-cell__bd" style="margin: 30px 0">
+          <sapn>吊顶/元
+          </sapn>
+          <input class="weui-input" name="input" placeholder-class="weui_input_placeholder_class" value="{{suspended_ceiling}}"   placeholder="费用价格" />
+          <sapn class="call-word">轻钢龙骨，泰山、龙牌石膏板微造型约90元/㎡建筑面积</sapn>
+        </view>
+        <view class="weui-cell__bd" style="margin: 30px 0">
+          <sapn>地墙砖铺贴/元
+          </sapn>
+          <input class="weui-input"  value="{{floor_tile}}"  name="input" placeholder-class="weui_input_placeholder_class" placeholder="费用价格" />
+          <sapn class="call-word">普通广东砖160元/㎡建筑面积</sapn>
+        </view>
+      </form>
+      
+
+      <form catchsubmit="formSubmit" catchreset="formReset" style="{{from_style3}}">
+        <view class="weui-cell__bd" style="margin: 30px 0">
+          <sapn>墙面乳胶漆/元</sapn>
+          <input id="input_acreage"  class="weui-input" name="input"  placeholder-class="weui_input_placeholder_class" placeholder="费用价格" value="{{wall}}" />
+          <sapn class="call-word">冷热水，电路改造约55元/㎡建筑面积</sapn>
+        </view>
+        <view class="weui-cell__bd" style="margin: 30px 0">
+          <sapn>厨房、卫生间集成吊顶/元
+          </sapn>
+          <input class="weui-input" name="input" placeholder-class="weui_input_placeholder_class" value="{{integrated_ceiling}}"   placeholder="费用价格" />
+          <sapn class="call-word">雨虹、立邦品牌防水材料约800元/个卫生间</sapn>
+        </view>
+        <view class="weui-cell__bd" style="margin: 30px 0">
+          <sapn>全屋定制衣柜、橱柜、洗衣机柜/元
+          </sapn>
+          <input class="weui-input" name="input" placeholder-class="weui_input_placeholder_class" value="{{whole_house_customization}}"   placeholder="费用价格" />
+          <sapn class="call-word">建筑面积90㎡约20㎡柜子、120㎡约30㎡柜子</sapn>
+        </view>
+        <view class="weui-cell__bd" style="margin: 30px 0">
+          <sapn>灯具、门/元
+          </sapn>
+          <input class="weui-input"  value="{{door}}"  name="input" placeholder-class="weui_input_placeholder_class" placeholder="费用价格" />
+          <sapn class="call-word">普通灯具合计约1500，普通室内门一扇1000*5</sapn>
+        </view>
+        <view class="weui-cell__bd" style="margin: 30px 0">
+          <sapn>合计
+          </sapn>
+          <input class="weui-input"  value="{{sum_list}}"  name="input" placeholder-class="weui_input_placeholder_class" placeholder="费用价格" />
+        </view>
+      </form>
+
+
+    </view>
+       <view style="display: flex;">
+        <span class="next_page_font next_page" bindtap="navigateToTarget2">←</span>
+        <span class="next_page_font next_page" bindtap="navigateToTarget">→</span>
+        </view>
+  </view>
+</scroll-view>
