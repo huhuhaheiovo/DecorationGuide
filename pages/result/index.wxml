@@ -1,0 +1,17 @@
+<navigation-bar title="费用汇总" back="{{true}}" color="black" background="#FFF"></navigation-bar>
+<scroll-view class="scrollarea" scroll-y type="list">
+  <view class="container">
+    <view class="h1_title">
+      <span class="h1_title_font">装修费用明细</span>
+    </view>
+    
+    <view class="canvas-container">
+      <canvas type="2d" id="myCanvas" class="cost-canvas"></canvas>
+    </view>
+    
+    <view class="total-amount">
+      <text class="total-label">总计金额：</text>
+      <text class="total-value">¥{{totalAmount}}</text>
+    </view>
+  </view>
+</scroll-view> 

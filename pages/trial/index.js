@@ -21,7 +21,7 @@ Page({
     dismantle_cost: 0,
     //铺设地暖
     dn: 0,
-
+    costData:0,
     //水电改造
     plumber: 0,
     //卫生间防水,
@@ -32,6 +32,7 @@ Page({
     floor_tile: 0,
     //墙面乳胶漆
     wall: 0,
+    
     //厨卫集成吊顶
     integrated_ceiling: 0,
     //全屋定制橱柜
@@ -44,10 +45,11 @@ Page({
     acreageError: '',
 
   },
-  navigateToTarget: function () {
+  view_next: function () {
     console.log("下一页")
     var pageNumber = this.data.page_number;
     var acreage = this.data.acreage;
+    
     if (pageNumber == 1) {
       if (acreage == null || acreage == '' || acreage == 0) {
         this.setData({
@@ -75,7 +77,7 @@ Page({
       })
     }
 
-
+    this.summarizing();
 
     if (pageNumber == 2) {
       var a = 20 + 10 * ((acreage - 90) / 30)
@@ -95,9 +97,9 @@ Page({
     this.setData({
       sum_list: this.data.acreage_yt_cost + this.data.dismantle_cost + this.data.dn + this.data.plumber + this.data.waterproof + this.data.suspended_ceiling + this.data.floor_tile + this.data.wall + this.data.integrated_ceiling + this.data.whole_house_customization + this.data.door
     })
-
   },
-  navigateToTarget2: function () {
+
+  view_up: function () {
     console.log("上一页")
     var pageNumber = this.data.page_number;
 
@@ -262,5 +264,35 @@ Page({
   // 拆除和砸墙
   chai_za() {
     console.log("拆除和砌墙")
+  },
+
+  summarizing: function() {
+    if(this.data.page_number==3){
+    // 收集所有费用数据
+    const costData = {
+      items: [
+        { title: '建筑面积', value: this.data.acreage + '㎡' },
+        { title: '封阳台', value: '¥' + this.data.acreage_yt_cost },
+        { title: '拆除和砌墙', value: '¥' + this.data.dismantle_cost },
+        { title: '铺设地暖', value: '¥' + this.data.dn },
+        { title: '水电改造', value: '¥' + this.data.plumber },
+        { title: '卫生间防水', value: '¥' + this.data.waterproof },
+        { title: '吊顶', value: '¥' + this.data.suspended_ceiling },
+        { title: '地墙砖铺贴', value: '¥' + this.data.floor_tile },
+        { title: '墙面乳胶漆', value: '¥' + this.data.wall },
+        { title: '厨卫集成吊顶', value: '¥' + this.data.integrated_ceiling },
+        { title: '全屋定制', value: '¥' + this.data.whole_house_customization },
+        { title: '灯具门窗', value: '¥' + this.data.door }
+      ],
+      totalAmount: this.data.sum_list
+    };
+
+    // 将数据存储到全局数据
+    getApp().globalData.costData = costData;
+    // 跳转到结果页
+    wx.navigateTo({
+      url: '/pages/result/index'
+    });
+    }
   }
 })

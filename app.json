@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/trial/index",
-    "pages/trial/index2"
+    "pages/trial/index2",
+    "pages/result/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",

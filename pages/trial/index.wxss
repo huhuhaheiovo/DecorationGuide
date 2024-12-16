@@ -109,3 +109,75 @@ page {
   font-weight: bold;
   color: red;
 }
+
+.form-item {
+  margin: 24rpx 0;
+  padding: 16rpx;
+}
+
+.form-label {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 12rpx;
+}
+
+.form-input {
+  width: 100%;
+  height: 80rpx;
+  padding: 0 24rpx;
+  border: 1px solid #ddd;
+  border-radius: 8rpx;
+  box-sizing: border-box;
+}
+
+.form-input-half {
+  width: 45%;
+  height: 80rpx;
+  padding: 0 24rpx;
+  border: 1px solid #ddd;
+  border-radius: 8rpx;
+  margin-right: 5%;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.hint-text {
+  font-size: 24rpx;
+  color: #666;
+  margin-top: 8rpx;
+}
+
+.error-text {
+  font-size: 24rpx;
+  color: #ff4d4f;
+  margin-top: 8rpx;
+}
+
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  padding: 32rpx;
+  margin-top: 40rpx;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.nav-button {
+  font-size: 48rpx;
+  color: #CDE7BE;
+  padding: 20rpx 60rpx;
+  background: rgba(205, 231, 190, 0.1);
+  border: 2px solid #CDE7BE;
+  border-radius: 16rpx;
+  transition: all 0.3s ease;
+}
+
+.nav-button:active {
+  background: rgba(205, 231, 190, 0.2);
+  transform: scale(0.95);
+}
