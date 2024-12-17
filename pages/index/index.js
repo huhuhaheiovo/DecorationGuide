@@ -4,7 +4,7 @@ Page({
   // 按钮点击事件处理函数
   navigateToTarget: function () {
     wx.navigateTo({
-      url: '../trial/index', // 目标页面路径
+      url: '../survey/index',
       success: function (res) {
         console.log('页面跳转成功');
       },

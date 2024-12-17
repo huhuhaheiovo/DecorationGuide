@@ -1,8 +1,8 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/survey/index",
     "pages/trial/index",
-    "pages/trial/index2",
     "pages/result/index"
   ],
   "window": {

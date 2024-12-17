@@ -1,0 +1,321 @@
+<navigation-bar title="基础信息调查" back="{{true}}" color="black" background="#FFF"></navigation-bar>
+<scroll-view class="scrollarea" scroll-y type="list">
+  <view class="container">
+    <view class="h1_title">
+      <span class="h1_title_font">基础信息调查</span>
+    </view>
+
+    <view class="survey-form">
+      <view class="form-item">
+        <view class="form-label">建筑面积</view>
+        <input class="form-input" 
+               type="digit"
+               value="{{area}}"
+               bindinput="handleAreaInput"
+               placeholder="请输入房屋建筑面积" 
+               placeholder-class="input-placeholder"/>
+        <view class="unit-text">平方米</view>
+      </view>
+
+      <view class="form-item">
+        <view class="form-label">房屋类型</view>
+        <view class="house-options">
+          <view class="house-option {{houseType === 'highrise' ? 'selected' : ''}}" 
+                bindtap="selectHouseType" 
+                data-type="highrise">
+            <text class="option-title">带电梯高层</text>
+          </view>
+
+          <view class="house-option {{houseType === 'walkup' ? 'selected' : ''}}" 
+                bindtap="selectHouseType" 
+                data-type="walkup">
+            <text class="option-title">无电梯楼房</text>
+          </view>
+
+          <view class="house-option {{houseType === 'villa' ? 'selected' : ''}}" 
+                bindtap="selectHouseType" 
+                data-type="villa">
+            <text class="option-title">带电梯小高层洋房</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="form-item">
+        <view class="form-label">是否需要封阳台</view>
+        <view class="balcony-need-options">
+          <view class="balcony-need-option {{needBalcony ? 'selected' : ''}}" 
+                bindtap="selectNeedBalcony" 
+                data-need="true">
+            <text>需要</text>
+          </view>
+          <view class="balcony-need-option {{needBalcony === false ? 'selected' : ''}}" 
+                bindtap="selectNeedBalcony" 
+                data-need="false">
+            <text>不需要</text>
+          </view>
+        </view>
+      </view>
+
+      <block wx:if="{{needBalcony}}">
+        <view class="form-item">
+          <view class="form-label">阳台面积</view>
+          <input class="form-input" 
+                 type="digit"
+                 value="{{balconyArea}}"
+                 bindinput="handleBalconyAreaInput"
+                 placeholder="请输入阳台面积" 
+                 placeholder-class="input-placeholder"/>
+          <view class="unit-text">平方米</view>
+        </view>
+
+        <view class="form-item">
+          <view class="form-label">封阳台材料</view>
+          <view class="balcony-options">
+            <view class="balcony-option {{balconyType === '60' ? 'selected' : ''}}" 
+                  bindtap="selectBalconyType" 
+                  data-type="60">
+              <text class="option-title">60断桥铝</text>
+            </view>
+
+            <view class="balcony-option {{balconyType === '90' ? 'selected' : ''}}" 
+                  bindtap="selectBalconyType" 
+                  data-type="90">
+              <text class="option-title">90断桥铝</text>
+            </view>
+
+            <view class="balcony-option {{balconyType === '110' ? 'selected' : ''}}" 
+                  bindtap="selectBalconyType" 
+                  data-type="110">
+              <text class="option-title">110断桥铝</text>
+            </view>
+          </view>
+        </view>
+      </block>
+
+      <!-- <view class="form-item">
+        <view class="form-label">窗户面积</view>
+        <input class="form-input" 
+               type="digit"
+               value="{{windowArea}}"
+               bindinput="handleWindowInput"
+               placeholder="请输入窗户总面积" 
+               placeholder-class="input-placeholder"/>
+        <view class="unit-text">平方米</view>
+      </view> -->
+
+      <view class="form-item">
+        <view class="form-label">卫生间数量</view>
+        <view class="number-input">
+          <view class="number-btn {{bathroom == 1 ? 'disabled' : ''}}" 
+                bindtap="decreaseBathroom">-</view>
+          <input class="number-display" 
+                 type="number" 
+                 value="{{bathroom}}" 
+                 disabled/>
+          <view class="number-btn" 
+                bindtap="increaseBathroom">+</view>
+        </view>
+        <view class="unit-text">间</view>
+      </view>
+
+      <view class="form-item">
+        <view class="form-label">城市类别</view>
+        <view class="city-options">
+          <view class="city-option {{cityType === '北上广深' ? 'selected' : ''}}" 
+                bindtap="selectCity" 
+                data-type="北上广深">
+            <text class="option-title">北上广深</text>
+            <text class="option-desc">一线城市</text>
+          </view>
+          <view class="city-option {{cityType === '一线城市' ? 'selected' : ''}}" 
+                bindtap="selectCity" 
+                data-type="一线城市">
+            <text class="option-title">一线城市</text>
+            <text class="option-desc">一线城市</text>
+          </view>
+          <view class="city-option {{cityType === '二线城市' ? 'selected' : ''}}" 
+                bindtap="selectCity" 
+                data-type="二线城市">
+            <text class="option-title">二线城市</text>
+            <text class="option-desc">二线城市</text>
+          </view>
+          <view class="city-option {{cityType === '其他' ? 'selected' : ''}}" 
+                bindtap="selectCity" 
+                data-type="其他">
+            <text class="option-title">其他</text>
+            <text class="option-desc">其他</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="form-item">
+        <view class="form-label">拆改范围</view>
+        <view class="renovation-options">
+          <view class="renovation-option {{renovationType === '房屋局部微调' ? 'selected' : ''}}" 
+                bindtap="selectRenovation" 
+                data-type="房屋局部微调">
+            <text class="option-title">房屋局部微调</text>
+            <text class="option-desc">厨卫改造、局部墙体调整</text>
+          </view>
+          <view class="renovation-option {{renovationType === '室内结构调整' ? 'selected' : ''}}" 
+                bindtap="selectRenovation" 
+                data-type="室内结构调整">
+            <text class="option-title">室内结构调整</text>
+            <text class="option-desc">大面积墙体拆除、空间重新规划</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="form-item">
+        <view class="form-label">水电改造方案</view>
+        <view class="plumbing-options">
+          <view class="plumbing-option {{plumbingType === 'basic' ? 'selected' : ''}}" 
+                bindtap="selectPlumbing" 
+                data-type="basic">
+            <text class="option-title">全部断点改造</text>
+            <text class="option-desc">超高性价比做法</text>
+          </view>
+
+          <view class="plumbing-option {{plumbingType === 'standard' ? 'selected' : ''}}" 
+                bindtap="selectPlumbing" 
+                data-type="standard">
+            <text class="option-title">电线断点改造冷水热水全部重新铺设</text>
+            <text class="option-desc">常规做法</text>
+          </view>
+
+          <view class="plumbing-option {{plumbingType === 'luxury' ? 'selected' : ''}}" 
+                bindtap="selectPlumbing" 
+                data-type="luxury">
+            <text class="option-title">全房重新铺设水电</text>
+            <text class="option-desc">豪华做法</text>
+          </view>
+
+          <view class="plumbing-option {{plumbingType === 'premium' ? 'selected' : ''}}" 
+                bindtap="selectPlumbing" 
+                data-type="premium">
+            <text class="option-title">全房水电重新铺设加全屋智能</text>
+            <text class="option-desc">超豪华做法</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="form-item">
+        <view class="form-label">地暖品牌选择</view>
+        <view class="heating-options">
+          <view class="heating-option {{heatingBrand === 'domestic' ? 'selected' : ''}}" 
+                bindtap="selectHeatingBrand" 
+                data-type="domestic">
+            <text class="option-title">国产品牌</text>
+            <text class="option-desc">金牛、保利等品牌</text>
+          </view>
+
+          <view class="heating-option {{heatingBrand === 'imported' ? 'selected' : ''}}" 
+                bindtap="selectHeatingBrand" 
+                data-type="imported">
+            <text class="option-title">进口品牌</text>
+            <text class="option-desc">威能、菲斯曼等品牌</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="form-item">
+        <view class="form-label">地面铺贴材料</view>
+        <view class="tile-options">
+          <view class="tile-option {{tileType === 'normal' ? 'selected' : ''}}" 
+                bindtap="selectTileType" 
+                data-type="normal">
+            <text class="option-title">普通瓷砖</text>
+          </view>
+
+          <view class="tile-option {{tileType === 'brand' ? 'selected' : ''}}" 
+                bindtap="selectTileType" 
+                data-type="brand">
+            <text class="option-title">品牌瓷砖</text>
+          </view>
+
+          <view class="tile-option {{tileType === 'luxury' ? 'selected' : ''}}" 
+                bindtap="selectTileType" 
+                data-type="luxury">
+            <text class="option-title">高档瓷砖</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="form-item">
+        <view class="form-label">墙面装修选择</view>
+        <view class="wall-options">
+          <view class="wall-option {{wallType === 'normal' ? 'selected' : ''}}" 
+                bindtap="selectWallType" 
+                data-type="normal">
+            <text class="option-title">常规乳胶漆</text>
+          </view>
+
+          <view class="wall-option {{wallType === 'partial' ? 'selected' : ''}}" 
+                bindtap="selectWallType" 
+                data-type="partial">
+            <text class="option-title">局部艺术漆壁布</text>
+          </view>
+
+          <view class="wall-option {{wallType === 'full' ? 'selected' : ''}}" 
+                bindtap="selectWallType" 
+                data-type="full">
+            <text class="option-title">全房艺术漆壁布</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="form-item">
+        <view class="form-label">吊顶方案选择</view>
+        <view class="ceiling-options">
+          <view class="ceiling-option {{ceilingType === 'basic' ? 'selected' : ''}}" 
+                bindtap="selectCeilingType" 
+                data-type="basic">
+            <text class="option-title">厨卫集成吊顶其余不吊顶</text>
+            <text class="option-desc">基础款</text>
+          </view>
+
+          <view class="ceiling-option {{ceilingType === 'standard' ? 'selected' : ''}}" 
+                bindtap="selectCeilingType" 
+                data-type="standard">
+            <text class="option-title">客餐厅卧室普通吊顶</text>
+            <text class="option-desc">标准款</text>
+          </view>
+
+          <view class="ceiling-option {{ceilingType === 'luxury' ? 'selected' : ''}}" 
+                bindtap="selectCeilingType" 
+                data-type="luxury">
+            <text class="option-title">客餐厅卧室艺术吊顶</text>
+            <text class="option-desc">豪华款</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="form-item">
+        <view class="form-label">定制产品选择</view>
+        <view class="custom-options">
+          <view class="custom-option {{customType === 'normal' ? 'selected' : ''}}" 
+                bindtap="selectCustomType" 
+                data-type="normal">
+            <text class="option-title">大众板材</text>
+          </view>
+
+          <view class="custom-option {{customType === 'brand' ? 'selected' : ''}}" 
+                bindtap="selectCustomType" 
+                data-type="brand">
+            <text class="option-title">品牌板材</text>
+          </view>
+
+          <view class="custom-option {{customType === 'wood' ? 'selected' : ''}}" 
+                bindtap="selectCustomType" 
+                data-type="wood">
+            <text class="option-title">实木材料</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="next-btn" bindtap="nextStep">
+        <text>下一步</text>
+      </view>
+    </view>
+  </view>
+</scroll-view> 

@@ -67,9 +67,12 @@ page {
 }
 
 .page-body {
+  width: 100%;
   display: flex;
-  margin-left: 10px;
-  justify-content:center;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20rpx;
+  box-sizing: border-box;
 }
 
 .cell__bd {
@@ -111,32 +114,41 @@ page {
 }
 
 .form-item {
-  margin: 24rpx 0;
-  padding: 16rpx;
+  margin: 24rpx 32rpx;
+  padding: 24rpx;
+  background: rgba(205, 231, 190, 0.05);
+  border-radius: 12rpx;
 }
 
 .form-label {
-  font-size: 28rpx;
-  color: #333;
-  margin-bottom: 12rpx;
+  font-size: 30rpx;
+  color: #CDE7BE;
+  margin-bottom: 16rpx;
+  font-weight: 500;
 }
 
 .form-input {
   width: 100%;
-  height: 80rpx;
-  padding: 0 24rpx;
-  border: 1px solid #ddd;
+  height: 88rpx;
+  padding: 0 32rpx;
+  border: 2px solid #CDE7BE;
   border-radius: 8rpx;
+  background: rgba(205, 231, 190, 0.1);
+  color: #FFFFFF;
   box-sizing: border-box;
+  font-size: 32rpx;
 }
 
 .form-input-half {
-  width: 45%;
-  height: 80rpx;
-  padding: 0 24rpx;
-  border: 1px solid #ddd;
+  width: 47%;
+  height: 88rpx;
+  padding: 0 32rpx;
+  border: 2px solid #CDE7BE;
   border-radius: 8rpx;
-  margin-right: 5%;
+  background: rgba(205, 231, 190, 0.1);
+  color: #FFFFFF;
+  margin-right: 3%;
+  font-size: 32rpx;
 }
 
 .input-group {
@@ -146,15 +158,17 @@ page {
 }
 
 .hint-text {
-  font-size: 24rpx;
-  color: #666;
-  margin-top: 8rpx;
+  font-size: 26rpx;
+  color: #008b28;
+  margin-top: 16rpx;
+  padding-left: 8rpx;
 }
 
 .error-text {
-  font-size: 24rpx;
+  font-size: 26rpx;
   color: #ff4d4f;
-  margin-top: 8rpx;
+  margin-top: 12rpx;
+  padding-left: 8rpx;
 }
 
 .navigation-buttons {
@@ -180,4 +194,17 @@ page {
 .nav-button:active {
   background: rgba(205, 231, 190, 0.2);
   transform: scale(0.95);
+}
+
+/* placeholder样式 */
+.input-placeholder {
+  color: rgba(205, 231, 190, 0.3);
+  font-size: 30rpx;
+}
+
+/* 调整表单容器样式 */
+form {
+  width: 100%;
+  max-width: 680rpx;
+  margin: 0 auto;
 }
