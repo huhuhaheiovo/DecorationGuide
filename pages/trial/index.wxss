@@ -67,12 +67,11 @@ page {
 }
 
 .page-body {
+  padding: 0 32rpx 120rpx;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0 20rpx;
   box-sizing: border-box;
+  max-width: 800rpx;
+  margin: 0 auto;
 }
 
 .cell__bd {
@@ -207,4 +206,241 @@ form {
   width: 100%;
   max-width: 680rpx;
   margin: 0 auto;
+}
+
+/* 添加新的样式 */
+.header {
+  padding: 48rpx 32rpx;
+  text-align: center;
+  margin-bottom: 32rpx;
+}
+
+.main-title {
+  display: block;
+  color: #CDE7BE;
+  font-size: 44rpx;
+  font-weight: 600;
+  margin-bottom: 16rpx;
+  letter-spacing: 2rpx;
+}
+
+.sub-title {
+  color: rgba(205, 231, 190, 0.6);
+  font-size: 28rpx;
+  line-height: 1.5;
+}
+
+.price-card {
+  background: rgba(205, 231, 190, 0.05);
+  border-radius: 20rpx;
+  margin-bottom: 32rpx;
+  border: 2rpx solid rgba(205, 231, 190, 0.1);
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  padding: 28rpx 32rpx;
+  border-bottom: 2rpx solid rgba(205, 231, 190, 0.1);
+  background: rgba(205, 231, 190, 0.02);
+}
+
+.card-title {
+  color: #CDE7BE;
+  font-size: 32rpx;
+  font-weight: 600;
+  letter-spacing: 1rpx;
+}
+
+.price-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28rpx 32rpx;
+  border-bottom: 2rpx solid rgba(205, 231, 190, 0.05);
+  transition: background-color 0.3s ease;
+}
+
+.price-item:hover {
+  background: rgba(205, 231, 190, 0.02);
+}
+
+.item-label {
+  color: rgba(205, 231, 190, 0.8);
+  font-size: 28rpx;
+  flex: 1;
+}
+
+.item-value {
+  color: #CDE7BE;
+  font-size: 32rpx;
+  font-weight: 500;
+  margin-left: 32rpx;
+}
+
+.price-desc {
+  padding: 20rpx 32rpx;
+  color: rgba(205, 231, 190, 0.6);
+  font-size: 24rpx;
+  background: rgba(205, 231, 190, 0.02);
+  line-height: 1.5;
+}
+
+.total-card {
+  background: linear-gradient(135deg, rgba(205, 231, 190, 0.15) 0%, rgba(205, 231, 190, 0.1) 100%);
+  border-radius: 20rpx;
+  padding: 36rpx 32rpx;
+  margin: 48rpx 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2rpx solid rgba(205, 231, 190, 0.2);
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.1);
+}
+
+.total-label {
+  color: #CDE7BE;
+  font-size: 34rpx;
+  font-weight: 600;
+  letter-spacing: 1rpx;
+}
+
+.total-value {
+  color: #CDE7BE;
+  font-size: 44rpx;
+  font-weight: 700;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+}
+
+/* 添加微信群相关样式 */
+.join-group-section {
+  padding: 0 32rpx 48rpx;
+}
+
+.join-group-card {
+  background: linear-gradient(135deg, rgba(205, 231, 190, 0.15) 0%, rgba(205, 231, 190, 0.05) 100%);
+  border-radius: 20rpx;
+  padding: 32rpx;
+  border: 2rpx solid rgba(205, 231, 190, 0.2);
+}
+
+.join-group-content {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.join-group-icon {
+  font-size: 48rpx;
+  margin-right: 24rpx;
+}
+
+.join-group-info {
+  flex: 1;
+}
+
+.join-group-title {
+  display: block;
+  color: #CDE7BE;
+  font-size: 32rpx;
+  font-weight: 600;
+  margin-bottom: 8rpx;
+}
+
+.join-group-desc {
+  display: block;
+  color: rgba(205, 231, 190, 0.6);
+  font-size: 24rpx;
+}
+
+.join-button {
+  background: #CDE7BE;
+  color: #181919;
+  font-size: 28rpx;
+  font-weight: 500;
+  padding: 16rpx 32rpx;
+  border-radius: 32rpx;
+  border: none;
+  min-width: 160rpx;
+  text-align: center;
+}
+
+.join-button:active {
+  opacity: 0.8;
+  transform: scale(0.98);
+}
+
+.join-group-features {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 24rpx;
+  border-top: 2rpx solid rgba(205, 231, 190, 0.1);
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  color: rgba(205, 231, 190, 0.8);
+  font-size: 24rpx;
+}
+
+.feature-icon {
+  color: #CDE7BE;
+  margin-right: 8rpx;
+}
+
+.feature-text {
+  color: rgba(205, 231, 190, 0.8);
+}
+
+/* 自定义弹窗样式 */
+.wx-modal-mask {
+  background-color: rgba(24, 25, 25, 0.9) !important;
+}
+
+.custom-modal .wx-modal-dialog {
+  background-color: #1f2020 !important;
+  border: 2rpx solid rgba(205, 231, 190, 0.15) !important;
+  border-radius: 20rpx !important;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.2) !important;
+}
+
+.custom-modal .wx-modal-title {
+  color: #CDE7BE !important;
+  font-weight: 600 !important;
+  padding: 32rpx 32rpx 16rpx !important;
+}
+
+.custom-modal .wx-modal-content {
+  color: rgba(205, 231, 190, 0.7) !important;
+  padding: 16rpx 32rpx 32rpx !important;
+  line-height: 1.6 !important;
+  font-size: 28rpx !important;
+}
+
+.custom-modal .wx-modal-footer {
+  border-top: 2rpx solid rgba(205, 231, 190, 0.1) !important;
+}
+
+.custom-modal .wx-modal-btn {
+  color: rgba(205, 231, 190, 0.8) !important;
+  background: rgba(205, 231, 190, 0.05) !important;
+  font-size: 30rpx !important;
+  line-height: 88rpx !important;
+}
+
+.custom-modal .wx-modal-btn:active {
+  background: rgba(205, 231, 190, 0.1) !important;
+}
+
+.custom-modal .wx-modal-btn-primary {
+  color: #181919 !important;
+  background: #CDE7BE !important;
+  font-weight: 500 !important;
+}
+
+.custom-modal .wx-modal-btn-primary:active {
+  opacity: 0.9;
+  background: #bdd4ae !important;
 }

@@ -645,4 +645,164 @@ page {
 .custom-option:active {
   opacity: 0.8;
   transform: scale(0.98);
-} 
+}
+
+/* 添加卫浴选择相关样式 */
+.bathroom-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20rpx;
+  margin-top: 16rpx;
+}
+
+.bathroom-option {
+  min-height: 120rpx;
+  padding: 20rpx 16rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #CDE7BE;
+  border-radius: 8rpx;
+  background: rgba(205, 231, 190, 0.1);
+  color: #CDE7BE;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.bathroom-option .option-title {
+  font-size: 26rpx;
+  font-weight: 500;
+  margin-bottom: 8rpx;
+  line-height: 1.2;
+}
+
+.bathroom-option .option-desc {
+  font-size: 22rpx;
+  opacity: 0.8;
+  line-height: 1.2;
+  color: #008b28;
+  margin-top: 8rpx;
+}
+
+.bathroom-option.selected {
+  background: #CDE7BE;
+  color: #181919;
+}
+
+.bathroom-option.selected .option-desc {
+  color: #181919;
+  opacity: 0.7;
+}
+
+.bathroom-option:active {
+  opacity: 0.8;
+  transform: scale(0.98);
+}
+
+/* 添加室内门选择相关样式 */
+.door-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20rpx;
+  margin-top: 16rpx;
+}
+
+.door-option {
+  min-height: 120rpx;
+  padding: 20rpx 16rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #CDE7BE;
+  border-radius: 8rpx;
+  background: rgba(205, 231, 190, 0.1);
+  color: #CDE7BE;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.door-option .option-title {
+  font-size: 26rpx;
+  font-weight: 500;
+  margin-bottom: 8rpx;
+  line-height: 1.2;
+}
+
+.door-option .option-desc {
+  font-size: 22rpx;
+  opacity: 0.8;
+  line-height: 1.2;
+  color: #008b28;
+  margin-top: 8rpx;
+}
+
+.door-option.selected {
+  background: #CDE7BE;
+  color: #181919;
+}
+
+.door-option.selected .option-desc {
+  color: #181919;
+  opacity: 0.7;
+}
+
+.door-option:active {
+  opacity: 0.8;
+  transform: scale(0.98);
+}
+
+/* 添加灯具选择相关样式 */
+.light-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20rpx;
+  margin-top: 16rpx;
+}
+
+.light-option {
+  min-height: 120rpx;
+  padding: 20rpx 16rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #CDE7BE;
+  border-radius: 8rpx;
+  background: rgba(205, 231, 190, 0.1);
+  color: #CDE7BE;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.light-option .option-title {
+  font-size: 26rpx;
+  font-weight: 500;
+  margin-bottom: 8rpx;
+  line-height: 1.2;
+}
+
+.light-option .option-desc {
+  font-size: 22rpx;
+  opacity: 0.8;
+  line-height: 1.2;
+  color: #008b28;
+  margin-top: 8rpx;
+}
+
+.light-option.selected {
+  background: #CDE7BE;
+  color: #181919;
+}
+
+.light-option.selected .option-desc {
+  color: #181919;
+  opacity: 0.7;
+}
+
+.light-option:active {
+  opacity: 0.8;
+  transform: scale(0.98);
+}
+ 

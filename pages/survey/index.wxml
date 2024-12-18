@@ -35,7 +35,7 @@
           <view class="house-option {{houseType === 'villa' ? 'selected' : ''}}" 
                 bindtap="selectHouseType" 
                 data-type="villa">
-            <text class="option-title">带电梯小高层洋房</text>
+            <text class="option-title">洋房别墅</text>
           </view>
         </view>
       </view>
@@ -91,18 +91,6 @@
           </view>
         </view>
       </block>
-
-      <!-- <view class="form-item">
-        <view class="form-label">窗户面积</view>
-        <input class="form-input" 
-               type="digit"
-               value="{{windowArea}}"
-               bindinput="handleWindowInput"
-               placeholder="请输入窗户总面积" 
-               placeholder-class="input-placeholder"/>
-        <view class="unit-text">平方米</view>
-      </view> -->
-
       <view class="form-item">
         <view class="form-label">卫生间数量</view>
         <view class="number-input">
@@ -117,7 +105,31 @@
         </view>
         <view class="unit-text">间</view>
       </view>
+      <view class="form-item">
+        <view class="form-label">卫浴选择</view>
+        <view class="bathroom-options">
+          <view class="bathroom-option {{bathroomType === 'normal' ? 'selected' : ''}}" 
+                bindtap="selectBathroomType" 
+                data-type="normal">
+            <text class="option-title">普通产品</text>
+            <text class="option-desc">性价比之选</text>
+          </view>
 
+          <view class="bathroom-option {{bathroomType === 'medium' ? 'selected' : ''}}" 
+                bindtap="selectBathroomType" 
+                data-type="medium">
+            <text class="option-title">二线品牌</text>
+            <text class="option-desc">知名品牌</text>
+          </view>
+
+          <view class="bathroom-option {{bathroomType === 'high' ? 'selected' : ''}}" 
+                bindtap="selectBathroomType" 
+                data-type="high">
+            <text class="option-title">一线品牌</text>
+            <text class="option-desc">高端品质</text>
+          </view>
+        </view>
+      </view>
       <view class="form-item">
         <view class="form-label">城市类别</view>
         <view class="city-options">
@@ -125,25 +137,21 @@
                 bindtap="selectCity" 
                 data-type="北上广深">
             <text class="option-title">北上广深</text>
-            <text class="option-desc">一线城市</text>
           </view>
           <view class="city-option {{cityType === '一线城市' ? 'selected' : ''}}" 
                 bindtap="selectCity" 
                 data-type="一线城市">
             <text class="option-title">一线城市</text>
-            <text class="option-desc">一线城市</text>
           </view>
           <view class="city-option {{cityType === '二线城市' ? 'selected' : ''}}" 
                 bindtap="selectCity" 
                 data-type="二线城市">
             <text class="option-title">二线城市</text>
-            <text class="option-desc">二线城市</text>
           </view>
           <view class="city-option {{cityType === '其他' ? 'selected' : ''}}" 
                 bindtap="selectCity" 
                 data-type="其他">
             <text class="option-title">其他</text>
-            <text class="option-desc">其他</text>
           </view>
         </view>
       </view>
@@ -309,6 +317,66 @@
                 bindtap="selectCustomType" 
                 data-type="wood">
             <text class="option-title">实木材料</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="form-item">
+        <view class="form-label">室内门数量</view>
+        <view class="number-input">
+          <view class="number-btn {{doorCount == 1 ? 'disabled' : ''}}" 
+                bindtap="decreaseDoorCount">-</view>
+          <input class="number-display" 
+                 type="number" 
+                 value="{{doorCount}}" 
+                 disabled/>
+          <view class="number-btn" 
+                bindtap="increaseDoorCount">+</view>
+        </view>
+        <view class="unit-text">扇</view>
+      </view>
+
+      <view class="form-item">
+        <view class="form-label">室内门级别</view>
+        <view class="door-options">
+          <view class="door-option {{doorType === 'normal' ? 'selected' : ''}}" 
+                bindtap="selectDoorType" 
+                data-type="normal">
+            <text class="option-title">普通产品</text>
+            <text class="option-desc">性价比之选</text>
+          </view>
+
+          <view class="door-option {{doorType === 'medium' ? 'selected' : ''}}" 
+                bindtap="selectDoorType" 
+                data-type="medium">
+            <text class="option-title">二线品牌</text>
+            <text class="option-desc">知名品牌</text>
+          </view>
+
+          <view class="door-option {{doorType === 'high' ? 'selected' : ''}}" 
+                bindtap="selectDoorType" 
+                data-type="high">
+            <text class="option-title">一线品牌</text>
+            <text class="option-desc">高端品质</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="form-item">
+        <view class="form-label">灯具选择</view>
+        <view class="light-options">
+          <view class="light-option {{lightType === 'normal' ? 'selected' : ''}}" 
+                bindtap="selectLightType" 
+                data-type="normal">
+            <text class="option-title">普通照明</text>
+            <text class="option-desc">基础款照明</text>
+          </view>
+
+          <view class="light-option {{lightType === 'creative' ? 'selected' : ''}}" 
+                bindtap="selectLightType" 
+                data-type="creative">
+            <text class="option-title">创意造型</text>
+            <text class="option-desc">个性化设计</text>
           </view>
         </view>
       </view>

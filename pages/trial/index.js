@@ -43,6 +43,15 @@ Page({
     sum_list: 0,
     inputStyle: '',
     acreageError: '',
+    surveyData: null,
+    priceData: {
+      // 墙面价格（每平米）
+      wall: {
+        'normal': 65, // 常规乳胶漆
+        'partial': 95, // 局部艺术漆壁布
+        'full': 145 // 全房艺术漆壁布
+      },
+    }
 
   },
   view_next: function () {
@@ -135,7 +144,193 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    const surveyData = getApp().globalData.surveyData;
+    this.setData({ surveyData }, () => {
+      this.calculatePrices();
+    });
+  },
 
+  calculatePrices: function() {
+    const { surveyData, priceData } = this.data;
+    const area = parseFloat(surveyData.area);
+    
+    // 修改水电改造费用计算
+    let plumberCost = 0;
+    switch(surveyData.plumbingType) {
+      case 'basic':
+        plumberCost = area * 40; // 全部断点改造：建筑面积 × 40元/㎡
+        break;
+      case 'standard':
+        plumberCost = area * 50; // 电线断点改造冷水热水全部重新铺设：建筑面积 × 50元/㎡
+        break;
+      case 'luxury':
+        plumberCost = area * 80; // 全房重新铺设水电：建筑面积 × 80元/㎡
+        break;
+      case 'premium':
+        plumberCost = area * 130; // 全房水电重新铺设加全屋智能：建筑面积 × 130元/㎡
+        break;
+    }
+    
+    // 修改地暖费用计算
+    let heatingCost = 0;
+    if (surveyData.heatingBrand === 'domestic') {
+      heatingCost = area * 70; // 国产品牌：建筑面积 × 70元/㎡
+    } else if (surveyData.heatingBrand === 'imported') {
+      heatingCost = area * 110; // 进口品牌：建筑面积 × 110元/㎡
+    }
+    
+    // 修改地面铺贴���用计算
+    let tileCost = 0;
+    switch(surveyData.tileType) {
+      case 'normal':
+        tileCost = area * 150; // 普通瓷砖：建筑面积 × 150元/㎡
+        break;
+      case 'brand':
+        tileCost = area * 170; // 品牌瓷砖：建筑面积 × 170元/㎡
+        break;
+      case 'luxury':
+        tileCost = area * 230; // 高档品牌瓷砖：建筑面积 × 230元/㎡
+        break;
+    }
+    
+    // 计算墙面费用
+    const wallCost = area * priceData.wall[surveyData.wallType];
+    
+    // 修改吊顶费用计算
+    let ceilingCost = 0;
+    switch(surveyData.ceilingType) {
+      case 'basic':
+        ceilingCost = area * 10; // 厨卫集成吊顶其余不吊顶：建筑面积 × 10元/㎡
+        break;
+      case 'standard':
+        ceilingCost = area * 90; // 客餐厅卧室普通吊顶：建筑面积 × 90元/㎡
+        break;
+      case 'luxury':
+        ceilingCost = area * 150; // 客餐厅卧室艺术吊顶：建筑面积 × 150元/㎡
+        break;
+    }
+    
+    // 修改封阳台费用计算
+    let balconyCost = 0;
+    if (surveyData.needBalcony && surveyData.balconyArea) {
+      const balconyArea = parseFloat(surveyData.balconyArea);
+      switch(surveyData.balconyType) {
+        case '60': 
+          balconyCost = balconyArea * 400; // 60断桥铝：400元/㎡
+          break;
+        case '90': 
+          balconyCost = balconyArea * 500; // 90断桥铝：500元/㎡
+          break;
+        case '110': 
+          balconyCost = balconyArea * 650; // 110断桥铝：650元/㎡
+          break;
+      }
+    }
+    
+    // 修改拆改费用计算逻辑
+    let dismantleCost = 0;
+    if (surveyData.renovationType === '房屋局部微调') {
+      dismantleCost = area * 22; // 局部微调筑面积 × 22元/㎡
+    } else {
+      dismantleCost = area * 100; // 结构调整：建筑面积 × 100元/㎡
+    }
+
+    // 修改卫生间防水费用计算
+    const waterproofCost = surveyData.bathroom * 900; // 每个卫生间900元
+
+    // 修改定制产品费用计算
+    let customCost = 0;
+    switch(surveyData.customType) {
+      case 'normal':
+        customCost = area * 220; // 大众板材：建筑面积 × 220元/㎡
+        break;
+      case 'brand':
+        customCost = area * 280; // 品牌板材：建筑面积 × 280元/㎡
+        break;
+      case 'wood':
+        customCost = area * 350; // 实木板材：建筑面积 × 350元/㎡
+        break;
+    }
+
+    // 修改室内门费用计算
+    let doorCost = 0;
+    const doorCount = surveyData.doorCount;
+    switch(surveyData.doorType) {
+      case 'normal':
+        doorCost = doorCount * 1000; // 普通门：1000元/扇
+        break;
+      case 'medium':
+        doorCost = doorCount * 3000; // 二线品牌：3000元/扇
+        break;
+      case 'high':
+        doorCost = doorCount * 5000; // 一线品牌：5000元/扇
+        break;
+    }
+
+    // 修改卫浴费用计算
+    let bathroomCost = 0;
+    const bathroomCount = surveyData.bathroom;
+    switch(surveyData.bathroomType) {
+      case 'normal':
+        bathroomCost = bathroomCount * 2000; // 普通产品：2000元/间
+        break;
+      case 'medium':
+        bathroomCost = bathroomCount * 5000; // 二线品牌：5000元/间
+        break;
+      case 'high':
+        bathroomCost = bathroomCount * 8000; // 一线品牌：8000元/间
+        break;
+    }
+
+    // 修改灯具费用计算
+    let lightCost = 0;
+    switch(surveyData.lightType) {
+      case 'normal':
+        lightCost = area * 20; // 普通照明：建筑面积 × 20元/㎡
+        break;
+      case 'creative':
+        lightCost = area * 50; // 创意造型：建筑面积 × 50元/㎡
+        break;
+    }
+
+    // 计算基础总价
+    const baseTotal = plumberCost + heatingCost + tileCost + wallCost + 
+                     ceilingCost + balconyCost + customCost + dismantleCost + 
+                     waterproofCost + doorCost + bathroomCost + lightCost; // 添加灯具费用
+
+    // 根据城市类别调整总价
+    let finalTotal = baseTotal;
+    switch(surveyData.cityType) {
+      case '北上广深':
+        finalTotal = baseTotal * 1.1;
+        break;
+      case '一线城市':
+        finalTotal = baseTotal;
+        break;
+      case '二线城市':
+        finalTotal = baseTotal * 0.95;
+        break;
+      case '其他':
+        finalTotal = baseTotal * 0.9;
+        break;
+    }
+
+    // 更新所有费用数据
+    this.setData({
+      plumber: Math.round(plumberCost),
+      dn: Math.round(heatingCost),
+      floor_tile: Math.round(tileCost),
+      wall: wallCost,
+      suspended_ceiling: Math.round(ceilingCost),
+      acreage_yt_cost: Math.round(balconyCost),
+      whole_house_customization: Math.round(customCost),
+      dismantle_cost: Math.round(dismantleCost),
+      waterproof: waterproofCost,
+      door: Math.round(doorCost),
+      bathroom_cost: Math.round(bathroomCost), // 添加卫浴费用
+      light_cost: Math.round(lightCost), // 添加灯具费用
+      sum_list: Math.round(finalTotal)
+    });
   },
 
   /**
@@ -294,5 +489,27 @@ Page({
       url: '/pages/result/index'
     });
     }
+  },
+
+  handleJoinGroup() {
+    wx.setClipboardData({
+      data: 'z406739684',  // 设计师微信号
+      success: () => {
+        wx.showModal({
+          title: '微信号已复制',
+          content: '添加设计师微信，邀请您加入交流群',
+          confirmText: '好的',
+          showCancel: false,
+          success: (res) => {
+            if (res.confirm) {
+              console.log('用户点击确定');
+            }
+          },
+          // 自定义弹窗样式
+          confirmColor: '#008b28', // 确认按钮颜色
+          className: 'custom-modal' // 自定义类名
+        });
+      }
+    });
   }
 })

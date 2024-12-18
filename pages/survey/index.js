@@ -14,7 +14,12 @@ Page({
     balconyArea: '',
     balconyType: '',
     ceilingType: '',
-    customType: ''
+    customType: '',
+    bathroomType: '',
+    doorType: '',
+    doorCount: 1,
+    lightType: '',
+    showFireworks: false
   },
 
   handleAreaInput(e) {
@@ -130,13 +135,80 @@ Page({
     });
   },
 
+  selectBathroomType(e) {
+    const type = e.currentTarget.dataset.type;
+    this.setData({
+      bathroomType: type
+    });
+  },
+
+  selectDoorType(e) {
+    const type = e.currentTarget.dataset.type;
+    this.setData({
+      doorType: type
+    });
+  },
+
+  increaseDoorCount() {
+    if (this.data.doorCount < 10) {
+      this.setData({
+        doorCount: this.data.doorCount + 1
+      });
+    }
+  },
+
+  decreaseDoorCount() {
+    if (this.data.doorCount > 1) {
+      this.setData({
+        doorCount: this.data.doorCount - 1
+      });
+    }
+  },
+
+  selectLightType(e) {
+    const type = e.currentTarget.dataset.type;
+    this.setData({
+      lightType: type
+    });
+  },
+
   nextStep() {
+    if (this.validateForm()) {
+      getApp().globalData.surveyData = {
+        houseType: this.data.houseType,
+        area: this.data.area,
+        windowArea: this.data.windowArea,
+        bathroom: this.data.bathroom,
+        cityType: this.data.cityType,
+        renovationType: this.data.renovationType,
+        plumbingType: this.data.plumbingType,
+        heatingBrand: this.data.heatingBrand,
+        tileType: this.data.tileType,
+        wallType: this.data.wallType,
+        needBalcony: this.data.needBalcony,
+        balconyArea: this.data.balconyArea,
+        balconyType: this.data.balconyType,
+        ceilingType: this.data.ceilingType,
+        customType: this.data.customType,
+        bathroomType: this.data.bathroomType,
+        doorCount: this.data.doorCount,
+        doorType: this.data.doorType,
+        lightType: this.data.lightType
+      };
+
+      wx.navigateTo({
+        url: '../trial/index'
+      });
+    }
+  },
+
+  validateForm() {
     if (!this.data.houseType) {
       wx.showToast({
         title: '请选择房屋类型',
         icon: 'none'
       });
-      return;
+      return false;
     }
 
     if (!this.data.area) {
@@ -144,16 +216,15 @@ Page({
         title: '请输入建筑面积',
         icon: 'none'
       });
-      return;
+      return false;
     }
-
 
     if (!this.data.cityType) {
       wx.showToast({
         title: '请选择城市类别',
         icon: 'none'
       });
-      return;
+      return false;
     }
 
     if (!this.data.renovationType) {
@@ -161,7 +232,7 @@ Page({
         title: '请选择拆改范围',
         icon: 'none'
       });
-      return;
+      return false;
     }
 
     if (!this.data.plumbingType) {
@@ -169,7 +240,7 @@ Page({
         title: '请选择水电改造方案',
         icon: 'none'
       });
-      return;
+      return false;
     }
 
     if (!this.data.heatingBrand) {
@@ -177,7 +248,7 @@ Page({
         title: '请选择地暖品牌',
         icon: 'none'
       });
-      return;
+      return false;
     }
 
     if (!this.data.tileType) {
@@ -185,7 +256,7 @@ Page({
         title: '请选择地面铺贴材料',
         icon: 'none'
       });
-      return;
+      return false;
     }
 
     if (!this.data.wallType) {
@@ -193,15 +264,15 @@ Page({
         title: '请选择墙面装修方案',
         icon: 'none'
       });
-      return;
+      return false;
     }
 
     if (this.data.needBalcony === null) {
       wx.showToast({
-        title: '请选择是否需要封阳台',
+        title: '请选择是否需封阳台',
         icon: 'none'
       });
-      return;
+      return false;
     }
 
     if (this.data.needBalcony) {
@@ -210,7 +281,7 @@ Page({
           title: '请输入阳台面积',
           icon: 'none'
         });
-        return;
+        return false;
       }
 
       if (!this.data.balconyType) {
@@ -218,7 +289,7 @@ Page({
           title: '请选择封阳台材料',
           icon: 'none'
         });
-        return;
+        return false;
       }
     }
 
@@ -227,7 +298,7 @@ Page({
         title: '请选择吊顶方案',
         icon: 'none'
       });
-      return;
+      return false;
     }
 
     if (!this.data.customType) {
@@ -235,31 +306,33 @@ Page({
         title: '请选择定制产品材料',
         icon: 'none'
       });
-      return;
+      return false;
     }
 
-    // 保存数据到全局
-    getApp().globalData.surveyData = {
-      houseType: this.data.houseType,
-      area: this.data.area,
-      windowArea: this.data.windowArea,
-      bathroom: this.data.bathroom,
-      cityType: this.data.cityType,
-      renovationType: this.data.renovationType,
-      plumbingType: this.data.plumbingType,
-      heatingBrand: this.data.heatingBrand,
-      tileType: this.data.tileType,
-      wallType: this.data.wallType,
-      needBalcony: this.data.needBalcony,
-      balconyArea: this.data.balconyArea,
-      balconyType: this.data.balconyType,
-      ceilingType: this.data.ceilingType,
-      customType: this.data.customType
-    };
+    if (!this.data.bathroomType) {
+      wx.showToast({
+        title: '请选择卫浴产品',
+        icon: 'none'
+      });
+      return false;
+    }
 
-    // 跳转到试算页面
-    wx.navigateTo({
-      url: '../trial/index'
-    });
+    if (!this.data.doorType) {
+      wx.showToast({
+        title: '请选择室内门级别',
+        icon: 'none'
+      });
+      return false;
+    }
+
+    if (!this.data.lightType) {
+      wx.showToast({
+        title: '请选择灯具类型',
+        icon: 'none'
+      });
+      return false;
+    }
+
+    return true;
   }
 }); 

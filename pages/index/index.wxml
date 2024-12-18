@@ -1,22 +1,41 @@
 <!--index.wxml-->
 <navigation-bar title="报价指南(测试版)" back="{{false}}" color="black" background="#FFF"></navigation-bar>
 <scroll-view class="scrollarea" scroll-y type="list">
-  <view class="h1_title">
-    <span class="h1_title_font">
-      新房装修费用试算
-    </span>
-  </view>
-  <view class="container">
-    <view class="trial" bindtap="navigateToTarget"><span class="trial_font" >进入试算</span>
+  <view class="header">
+    <view class="title-container">
+      <text class="main-title">装修预算计算器</text>
+      <text class="sub-title">专业的装修费用评估工具</text>
     </view>
   </view>
-  <view class="h1_title">
-    <span class="h1_title_font">
-      联系设计师
-    </span>
-    <view class="user_image">
-      <!-- 本地图片 -->
-      <image src="../../images/usera.jpg" class="example-image"></image>
+
+  <view class="container">
+    <view class="card">
+      <view class="card-content">
+        <view class="feature-text">
+          <text class="feature-title">智能预算</text>
+          <text class="feature-desc">根据您的房屋情况，智能计算装修费用</text>
+        </view>
+        <view class="trial" bindtap="navigateToTarget">
+          <text class="trial-text">开始计算</text>
+          <text class="trial-icon">→</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="card contact-card">
+      <view class="card-content">
+        <view class="feature-text">
+          <text class="feature-title">专业咨询</text>
+          <text class="feature-desc">设计师免费咨询服务</text>
+        </view>
+        <view class="contact-designer" bindtap="contactDesigner">
+          <image src="../../images/usera.jpg" class="designer-avatar"></image>
+          <view class="contact-info">
+            <text class="contact-name">设计师</text>
+            <text class="contact-hint">点击复制微信号</text>
+          </view>
+        </view>
+      </view>
     </view>
   </view>
 </scroll-view>

@@ -1,152 +1,145 @@
 <!--index.wxml-->
 
-<navigation-bar title="报价指南(测试版)" back="{{false}}" color="black" background="#FFF"></navigation-bar>
+<navigation-bar title="报价指南(测试版)" back="{{true}}" color="black" background="#FFF"></navigation-bar>
 <scroll-view class="scrollarea" scroll-y type="list">
-  <view class="h1_title">
-    <span class="h1_title_font">
-      新房装修费用试算
-    </span>
+  <view class="header">
+    <text class="main-title">装修费用明细</text>
+    <text class="sub-title">根据您的选择，为您计算装修费用</text>
   </view>
+
   <view class="container">
     <view class="page-body">
-      <form catchsubmit="formSubmit" catchreset="formReset" style="{{from_style1}}">
-        <view class="form-item">
-          <view class="form-label">建筑面积</view>
-          <input id="input_acreage" 
-                 class="form-input" 
-                 name="input" 
-                 bindblur="acreage"
-                 placeholder="房本面积" 
-                 placeholder-class="input-placeholder"
-                 value="{{acreage}}" />
-          <view class="error-text">{{acreageError}}</view>
+      <!-- 基础信息卡片 -->
+      <view class="price-card">
+        <view class="card-header">
+          <text class="card-title">基础信息</text>
         </view>
+        <view class="price-item">
+          <text class="item-label">建筑面积</text>
+          <text class="item-value">{{surveyData.area}}㎡</text>
+        </view>
+        <view class="price-item">
+          <text class="item-label">房屋类型</text>
+          <text class="item-value">{{surveyData.houseType === 'highrise' ? '带电梯高层' : 
+                                   surveyData.houseType === 'walkup' ? '无电梯楼房' : '洋房别墅'}}</text>
+        </view>
+      </view>
 
-        <view class="form-item">
-          <view class="form-label">封阳台</view>
-          <view class="input-group">
-            <input class="form-input-half" 
-                   name="input"
-                   bindblur="fyt" 
-                   placeholder="面积" 
-                   value="{{acreage_yt}}" />
-            <input class="form-input-half" 
-                   name="input"
-                   placeholder="费用价格"
-                   value="{{acreage_yt_cost}}"/>
+      <!-- 拆改费片 -->
+      <view class="price-card">
+        <view class="card-header">
+          <text class="card-title">拆改工程</text>
+        </view>
+        <view class="price-item">
+          <text class="item-label">拆除和砌墙</text>
+          <text class="item-value">¥{{dismantle_cost}}</text>
+        </view>
+        <view class="price-desc">{{surveyData.renovationType === '房屋局部微调' ? 
+          '厨卫改造、局部墙体调整' : '大面积墙体拆除、空间重新规划'}}</view>
+      </view>
+
+      <!-- 基础工程卡片 -->
+      <view class="price-card">
+        <view class="card-header">
+          <text class="card-title">基础工程</text>
+        </view>
+        <view class="price-item">
+          <text class="item-label">水电改造</text>
+          <text class="item-value">¥{{plumber}}</text>
+        </view>
+        <view class="price-item">
+          <text class="item-label">地暖铺设</text>
+          <text class="item-value">¥{{dn}}</text>
+        </view>
+        <view class="price-item">
+          <text class="item-label">卫生间防水</text>
+          <text class="item-value">¥{{waterproof}}</text>
+        </view>
+      </view>
+
+      <!-- 主体装修卡片 -->
+      <view class="price-card">
+        <view class="card-header">
+          <text class="card-title">主体装修</text>
+        </view>
+        <view class="price-item">
+          <text class="item-label">地面铺贴</text>
+          <text class="item-value">¥{{floor_tile}}</text>
+        </view>
+        <view class="price-item">
+          <text class="item-label">墙面处理</text>
+          <text class="item-value">¥{{wall}}</text>
+        </view>
+        <view class="price-item">
+          <text class="item-label">吊顶工程</text>
+          <text class="item-value">¥{{suspended_ceiling}}</text>
+        </view>
+      </view>
+
+      <!-- 定制项目卡片 -->
+      <view class="price-card">
+        <view class="card-header">
+          <text class="card-title">定制项目</text>
+        </view>
+        <view class="price-item">
+          <text class="item-label">全屋定制</text>
+          <text class="item-value">¥{{whole_house_customization}}</text>
+        </view>
+        <block wx:if="{{surveyData.needBalcony}}">
+          <view class="price-item">
+            <text class="item-label">封阳台({{surveyData.balconyArea}}㎡)</text>
+            <text class="item-value">¥{{acreage_yt_cost}}</text>
           </view>
-          <view class="hint-text">断桥铝钢网一体[90mm]≈500/㎡,[110mm]≈650/㎡</view>
+        </block>
+        <view class="price-item">
+          <text class="item-label">室内门({{surveyData.doorCount}}扇)</text>
+          <text class="item-value">¥{{door}}</text>
         </view>
+        <view class="price-item">
+          <text class="item-label">卫浴产品({{surveyData.bathroom}}间)</text>
+          <text class="item-value">¥{{bathroom_cost}}</text>
+        </view>
+        <view class="price-item">
+          <text class="item-label">灯具({{surveyData.lightType === 'normal' ? '普通照明' : '创意造型'}})</text>
+          <text class="item-value">¥{{light_cost}}</text>
+        </view>
+      </view>
 
-        <view class="form-item">
-          <view class="form-label">拆除和砌墙</view>
-          <input class="form-input"
-                 name="input"
-                 value="{{dismantle_cost}}"
-                 bindblur="a"
-                 placeholder="费用价格" />
-          <view class="hint-text">厨卫少量拆砸，其他位置布局微调，保温层清理</view>
-        </view>
+      <!-- 合计金额 -->
+      <view class="total-card">
+        <text class="total-label">预估总价</text>
+        <text class="total-value">¥{{sum_list}}</text>
+      </view>
 
-        <view class="form-item">
-          <view class="form-label">铺设地暖</view>
-          <input class="form-input" 
-                 value="{{dn}}" 
-                 name="input" 
-                 placeholder="费用价格" />
-          <view class="hint-text">金牛、保利品牌材料可折算约75元/㎡</view>
+      <!-- 在total-card后面添加微信群功能 -->
+      <view class="join-group-section">
+        <view class="join-group-card">
+          <view class="join-group-content">
+            <view class="join-group-icon">👥</view>
+            <view class="join-group-info">
+              <text class="join-group-title">加入交流群</text>
+              <text class="join-group-desc">获取更多装修经验分享、避坑指南</text>
+            </view>
+            <button class="join-button" bindtap="handleJoinGroup">
+              <text>加入群聊</text>
+            </button>
+          </view>
+          <view class="join-group-features">
+            <view class="feature-item">
+              <text class="feature-icon">✓</text>
+              <text class="feature-text">装修经验分享</text>
+            </view>
+            <view class="feature-item">
+              <text class="feature-icon">✓</text>
+              <text class="feature-text">材料选购建议</text>
+            </view>
+            <view class="feature-item">
+              <text class="feature-icon">✓</text>
+              <text class="feature-text">设计师答疑</text>
+            </view>
+          </view>
         </view>
-      </form>
-
-      <form catchsubmit="formSubmit" catchreset="formReset" style="{{from_style2}}">
-        <view class="form-item">
-          <view class="form-label">水电改造</view>
-          <input class="form-input" 
-                 name="input" 
-                 value="{{plumber}}" 
-                 placeholder="费用价格" />
-          <view class="hint-text">冷热水，电路改造约55元/㎡建筑面积</view>
-        </view>
-
-        <view class="form-item">
-          <view class="form-label">卫生间防水</view>
-          <input class="form-input" 
-                 name="input" 
-                 value="{{waterproof}}" 
-                 placeholder="费用价格" />
-          <view class="hint-text">雨虹、立邦品牌防水材料约800元/个卫生间</view>
-        </view>
-
-        <view class="form-item">
-          <view class="form-label">吊顶</view>
-          <input class="form-input" 
-                 name="input" 
-                 value="{{suspended_ceiling}}" 
-                 placeholder="费用价格" />
-          <view class="hint-text">轻钢龙骨，泰山、龙牌石膏板微造型约90元/㎡建筑面积</view>
-        </view>
-
-        <view class="form-item">
-          <view class="form-label">地墙砖铺贴</view>
-          <input class="form-input" 
-                 name="input" 
-                 value="{{floor_tile}}" 
-                 placeholder="费用价格" />
-          <view class="hint-text">水泥大沙工费-普通广东砖160元/㎡建筑面积</view>
-        </view>
-      </form>
-      
-
-      <form catchsubmit="formSubmit" catchreset="formReset" style="{{from_style3}}">
-        <view class="form-item">
-          <view class="form-label">墙面乳胶漆</view>
-          <input class="form-input" 
-                 name="input" 
-                 value="{{wall}}" 
-                 placeholder="费用价格" />
-          <view class="hint-text">材料用立邦、三棵树等家用热销品牌</view>
-        </view>
-
-        <view class="form-item">
-          <view class="form-label">厨房、卫生间集成吊顶</view>
-          <input class="form-input" 
-                 name="input" 
-                 value="{{integrated_ceiling}}" 
-                 placeholder="费用价格" />
-          <view class="hint-text">雨虹、立邦品牌防水材料约800元/个卫生间</view>
-        </view>
-
-        <view class="form-item">
-          <view class="form-label">全屋定制衣柜、橱柜、洗衣机柜</view>
-          <input class="form-input" 
-                 name="input" 
-                 value="{{whole_house_customization}}" 
-                 placeholder="费用价格" />
-          <view class="hint-text">建筑面积90㎡约20㎡柜子、120㎡约30㎡柜子</view>
-        </view>
-
-        <view class="form-item">
-          <view class="form-label">灯具、门</view>
-          <input class="form-input" 
-                 name="input" 
-                 value="{{door}}" 
-                 placeholder="费用价格" />
-          <view class="hint-text">普通灯具合计约1500，普通室内门一扇1000*5</view>
-        </view>
-
-        <view class="form-item">
-          <view class="form-label">合计</view>
-          <input class="form-input" 
-                 name="input" 
-                 value="{{sum_list}}" 
-                 placeholder="费用价格" 
-                 disabled />
-        </view>
-      </form>
+      </view>
     </view>
   </view>
-       <view class="navigation-buttons">
-        <span class="nav-button" bindtap="view_up">←</span>
-        <span class="nav-button" bindtap="view_next">→</span>
-      </view>
 </scroll-view>
